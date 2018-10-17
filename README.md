@@ -30,7 +30,7 @@ You will need
   * Networking.  Choose "Allow Selected Ports".  Select "SSH (22)".  Click "Next: Management".
   * Tags. Accept defaults. Click 
 * Wait for the VM to deploy.
-* Open Port 1883 outbound on the VM
+* Open Port 1883 inbound on the VM.
   * Go to the "Networking" setting for the VM.
   * Create a new inbound port rule to allow inbound traffic on Port 1883
   
@@ -65,3 +65,12 @@ dpkg -s vernemq | grep Status
 * Find the 'listener.tcp.default" configuration.  Set the default listener to allow incoming connections.
 ```
 listener.tcp.default = "0.0.0.0:1883"
+```
+* Increase the open file limits.  Create a new file '/etc/security/limits.conf' in an editor.  Add the following to the file:
+```
+/etc/default/vernemq
+```
+* Start VerneMQ
+```
+vernemq start
+```
