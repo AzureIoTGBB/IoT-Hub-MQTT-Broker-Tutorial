@@ -30,6 +30,10 @@ You will need
   * Networking.  Choose "Allow Selected Ports".  Select "SSH (22)".  Click "Next: Management".
   * Tags. Accept defaults. Click 
 * Wait for the VM to deploy.
+* Open Port 1883 outbound on the VM
+  * Go to the "Networking" setting for the VM.
+  * Create a new inbound port rule to allow inbound traffic on Port 1883
+  
 
 ### Install VerneMQ
 
