@@ -14,7 +14,7 @@ You will need
 * an Azure subscription.  If you do not already have one, you can create an Azure account and subscription with free credits [here](https://azure.microsoft.com/en-ca/free)
 * an IoT Hub.  If you do not already have one, create one via the instructions [here](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-create-using-cli#create-an-iot-hub)
 * Visual Studio 2017.
-* Basic Linux skillset.
+* some basic Linux skills (directory management, file editing, etc.)
 * an intermediate understanding of how to create resources in Azure.  Field by field instructions are not provided.
 
 ## Step 1 - Create and Configure an MQTT Broker in an Azure VM
@@ -74,3 +74,29 @@ listener.tcp.default = "0.0.0.0:1883"
 ```
 vernemq start
 ```
+## Useful VerneMQ Commands
+Below are some useful Linux/VerneMQ commands.  I have placed them in a cmds directory in this repo.  I place them in a 'cmds' directory on my Linux VM, and make them executable.  eg:
+```
+# mkdir cmds
+# cd cmds
+```
+Copy files to the cmds directory.  Then set permissions:
+```
+# chmod 700 cmds
+```
+Then you can execute them by placing a './' in front of them.  eg:
+```
+./vstart
+```
+Here are the commands
+```
+Description                           Command
+=================================     =================================
+Start                                 vernemq start
+Stop                                  vernemq stop
+Edit the Configuration File           vi /etc/vernemq/vernemq.conf
+Open the Console                      vernemq console
+View Debug information                vernemq config generate -l debug
+View Log Data                         tail -f /var/log/vernemq/console.log
+View services listening on port 1883  netstat -p tcp -ano | grep "1883"
+Ping VerneMQ                          vernemq ping
