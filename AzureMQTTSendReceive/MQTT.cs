@@ -6,6 +6,10 @@ using System.Threading;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
+/// <summary>
+/// CAVEAT: This sample is to demonstrate azure IoT client concepts only and is not a guide design principles or style. 
+/// Proper exception management is omitted for brevity. Please practice sound engineering practices when writing production code.
+/// </summary>
 namespace AzureMQTTSendReceive
 {
     public class MQTT

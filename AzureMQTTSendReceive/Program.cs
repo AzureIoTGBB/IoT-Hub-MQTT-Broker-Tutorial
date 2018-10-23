@@ -7,6 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
+/// <summary>
+/// CAVEAT: This sample is to demonstrate azure IoT client concepts only and is not a guide design principles or style. 
+/// Proper exception management is omitted for brevity. Please practice sound engineering practices when writing production code.
+/// </summary>
 namespace AzureMQTTSendReceive
 {
     class Program
