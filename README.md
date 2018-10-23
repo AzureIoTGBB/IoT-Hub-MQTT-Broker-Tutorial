@@ -1,6 +1,8 @@
 # MQTT Broker to Azure IoT Hub Tutorial
 
-NOTE: This repo is currently "work in progress".  
+**This repo is currently "work in progress".** 
+
+**CAVEAT: This sample is to demonstrate azure IoT client concepts only and is not a guide design principles or style.  Proper exception management is omitted for brevity.  Please practice sound engineering practices when writing production code.**
 
 This tutorial will walk you through the following steps:
 1) Create and configure an MQTT Broker (VerneMQ) in an Azure Ubuntu Linux VM.
@@ -17,7 +19,7 @@ You will need
 * some basic Linux skills (directory management, file editing, etc.)
 * an intermediate understanding of how to create resources in Azure.  Field by field instructions are not provided.
 
-## Step 1 - Create and Configure an MQTT Broker in an Azure VM
+##  Create and Configure an MQTT Broker in an Azure VM
 
 ### Create an Ubuntu 16.04 Linux VM
 
@@ -62,7 +64,9 @@ dpkg -i <filename>
 dpkg -s vernemq | grep Status
 ```
 * Edit the '/etc/vernemq/vernemq.conf' file
-* Find the 'listener.tcp.default" configuration.  Set the default listener to allow incoming connections.
+* Find the 'allow_anonymous' configuration.  Set it to "on".  
+  * NOTE: This will allow anonymous connections to your MQTT Broker and is not recommended for production installations.
+* Find the 'listener.tcp.default' configuration.  Set the default listener to allow incoming connections.
 ```
 listener.tcp.default = "0.0.0.0:1883"
 ```
@@ -74,8 +78,8 @@ listener.tcp.default = "0.0.0.0:1883"
 ```
 vernemq start
 ```
-## Useful VerneMQ Commands
-Below are some useful Linux/VerneMQ commands.  I have placed them in a cmds directory in this repo.  I place them in a 'cmds' directory on my Linux VM, and make them executable.  eg:
+### Useful VerneMQ Commands
+Below are some useful Linux/VerneMQ commands.  They are located in the cmds directory in this repo.  I place them in a 'cmds' directory on my Linux VM, and make them executable.  eg:
 ```
 # mkdir cmds
 # cd cmds
@@ -100,3 +104,62 @@ vdebug   View Debug information                vernemq config generate -l debug
 vlog     View Log Data                         tail -f /var/log/vernemq/console.log
 vnetstat View services listening on port 1883  netstat -p tcp -ano | grep "1883"
 vping    Ping VerneMQ                          vernemq ping
+``` 
+
+## Configure the Azure IoT Hub
+
+Create the IoT Hub.  
+* Open the [Azure Portal](https://portal.azure.com)
+* Click "+ Create a resource".  (top left)
+* In the "Search the Marketplace" box, enter "Iot Hub"
+* Click on "IoT Hub"
+* Click "Create"
+* Enter the name of your hub
+* Accept defaults. Any SKU including the "Free" or "Basic" SKUs will work.
+* Click on "Review and Create"
+* Click "Create"
+  
+Wait for the IoT Hub to be provisioned, then go to the new IoT Hub in the Portal.
+
+Create a device to send the MQTT messages to:
+
+* Click on the "IoT Devices" blade under "Explorers"
+* Click "+ Add"
+* Type in a name for your device
+* Click "Save"
+* Click on the device
+* Copy the connection string.  We will need it later.
+
+## Configuring the C# App
+
+First clone the repo:
+```
+git clone https://github.com/AzureIoTGBB/IoT-Hub-MQTT-Broker-Tutorial 
+```
+Open AzureMQTTSendReceive.sln in Visual Studio 2017, then open the App.config file.  
+
+* Set the "MQTTDevice" connection string to the connection string for your device
+* Set the "MQTTBrokerAddress" to either the domain name or the ip address of your MQTT server
+* Leave "MQTTUsername" blank ("")
+* Leave "MQTTPassword" blank ("")
+
+Compile the solution.  
+
+Make two copies of the binaries (debug directory), one for sending and one for receiving.  In "send" mode the code will send the CPU and Memory values from your PC to the MQTT Broker.  eg. {"CPU":32.88946,"Memory":6513.0}  In "receive" mode, the code will receive messages from the MQTT Broker and send them to the IoT Hub.
+```
+<directory1>\AzureMQTTSendReceive.exe send
+<directory2>\AzureMQTTSendReceive.exe receive
+```
+To view the messages from the IoT Hub, use the az command line tool on your PC.
+* Open the [Azure Portal](http://portal.azure.com) in your browser
+* click on the "Cloud Shell" button on the menu bar across the top
+* install the azure iot cli extension with the following command
+```bash
+az extension add --name azure-cli-iot-ext
+```
+* once installed, you can monitor events coming into your IoT Hub with the following command:
+```
+az iot hub monitor-events -n <IoT Hub Name>
+```
+
+That's it!
