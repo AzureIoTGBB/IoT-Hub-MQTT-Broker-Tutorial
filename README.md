@@ -76,7 +76,7 @@ listener.tcp.default = "0.0.0.0:1883"
 ```
 vernemq start
 ```
-## Useful VerneMQ Commands
+### Useful VerneMQ Commands
 Below are some useful Linux/VerneMQ commands.  They are located in the cmds directory in this repo.  I place them in a 'cmds' directory on my Linux VM, and make them executable.  eg:
 ```
 # mkdir cmds
