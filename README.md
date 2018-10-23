@@ -143,11 +143,21 @@ Open AzureMQTTSendReceive.sln in Visual Studio 2017, then open the App.config fi
 
 Compile the solution.  
 
-Make two copies of the binaries (debug directory), one for sending and one for receiving.  The code will send the CPU and Memory values from your PC to the MQTT Broker.  
+Make two copies of the binaries (debug directory), one for sending and one for receiving.  In "send" mode the code will send the CPU and Memory values from your PC to the MQTT Broker.  eg. {"CPU":32.88946,"Memory":6513.0}  In "receive" mode, the code will receive messages from the MQTT Broker and send them to the IoT Hub.
 ```
 <directory1>\AzureMQTTSendReceive.exe send
 <directory2>\AzureMQTTSendReceive.exe receive
 ```
+To view the messages from the IoT Hub, use the az command line tool on your PC.
+* Open the [Azure Portal](http://portal.azure.com) in your browser
+* click on the "Cloud Shell" button on the menu bar across the top
+* install the azure iot cli extension with the following command
+```bash
+az extension add --name azure-cli-iot-ext
+```
+* once installed, you can monitor events coming into your IoT Hub with the following command:
+```
+az iot hub monitor-events -n <IoT Hub Name>
+```
 
-
-
+That's it!
