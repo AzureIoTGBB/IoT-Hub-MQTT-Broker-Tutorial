@@ -100,3 +100,37 @@ vdebug   View Debug information                vernemq config generate -l debug
 vlog     View Log Data                         tail -f /var/log/vernemq/console.log
 vnetstat View services listening on port 1883  netstat -p tcp -ano | grep "1883"
 vping    Ping VerneMQ                          vernemq ping
+``` 
+
+## Configure the Azure IoT Hub
+
+Create the IoT Hub.  
+* Open the [Azure Portal](https://portal.azure.com)
+* Click "+ Create a resource".  (top left)
+* In the "Search the Marketplace" box, enter "Iot Hub"
+* Click on "IoT Hub"
+* Click "Create"
+* Enter the name of your hub
+* Accept defaults. Any SKU including the "Free" or "Basic" SKUs will work.
+* Click on "Review and Create"
+* Click "Create"
+  
+Wait for the IoT Hub to be provisioned, then go to the new IoT Hub in the Portal.
+
+Create a device to send the MQTT messages to:
+
+* Click on the "IoT Devices" blade under "Explorers"
+* Click "+ Add"
+* Type in a name for your device
+* Click "Save"
+* Click on the device
+* Copy the connection string.  We will need it later.
+
+## Configuring the C# App
+
+First clone the repo:
+```
+git clone https://github.com/AzureIoTGBB/IoT-Hub-MQTT-Broker-Tutorial 
+```
+Open AzureMQTTSendReceive.sln in Visual Studio 2017.  
+
