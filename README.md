@@ -17,7 +17,7 @@ You will need
 * some basic Linux skills (directory management, file editing, etc.)
 * an intermediate understanding of how to create resources in Azure.  Field by field instructions are not provided.
 
-## Step 1 - Create and Configure an MQTT Broker in an Azure VM
+##  Create and Configure an MQTT Broker in an Azure VM
 
 ### Create an Ubuntu 16.04 Linux VM
 
