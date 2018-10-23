@@ -1,6 +1,6 @@
 # MQTT Broker to Azure IoT Hub Tutorial
 
-**Please Note this repo is currently "work in progress". ** 
+**This repo is currently "work in progress".** 
 
 **CAVEAT: This sample is to demonstrate azure IoT client concepts only and is not a guide design principles or style.  Proper exception management is omitted for brevity.  Please practice sound engineering practices when writing production code.**
 
