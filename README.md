@@ -1,6 +1,8 @@
 # MQTT Broker to Azure IoT Hub Tutorial
 
-NOTE: This repo is currently "work in progress".  
+**Please Note this repo is currently "work in progress". ** 
+
+**CAVEAT: This sample is to demonstrate azure IoT client concepts only and is not a guide design principles or style.  Proper exception management is omitted for brevity.  Please practice sound engineering practices when writing production code.**
 
 This tutorial will walk you through the following steps:
 1) Create and configure an MQTT Broker (VerneMQ) in an Azure Ubuntu Linux VM.
