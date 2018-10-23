@@ -90,13 +90,13 @@ Then you can execute them by placing a './' in front of them.  eg:
 ```
 Here are the commands
 ```
-Description                           Command
-=================================     =================================
-Start                                 vernemq start
-Stop                                  vernemq stop
-Edit the Configuration File           vi /etc/vernemq/vernemq.conf
-Open the Console                      vernemq console
-View Debug information                vernemq config generate -l debug
-View Log Data                         tail -f /var/log/vernemq/console.log
-View services listening on port 1883  netstat -p tcp -ano | grep "1883"
-Ping VerneMQ                          vernemq ping
+Command  Description                           Command
+=======  =================================     =================================
+vmstart  Start                                 vernemq start
+vmstop   Stop                                  vernemq stop
+vconf    Edit the Configuration File           vi /etc/vernemq/vernemq.conf
+vconsole Open the Console                      vernemq console
+vdebug   View Debug information                vernemq config generate -l debug
+vlog     View Log Data                         tail -f /var/log/vernemq/console.log
+vnetstat View services listening on port 1883  netstat -p tcp -ano | grep "1883"
+vping    Ping VerneMQ                          vernemq ping
