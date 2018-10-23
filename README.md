@@ -62,7 +62,9 @@ dpkg -i <filename>
 dpkg -s vernemq | grep Status
 ```
 * Edit the '/etc/vernemq/vernemq.conf' file
-* Find the 'listener.tcp.default" configuration.  Set the default listener to allow incoming connections.
+* Find the 'allow_anonymous' configuration.  Set it to "on".  
+  * NOTE: This will allow anonymous connections to your MQTT Broker and is not recommended for production installations.
+* Find the 'listener.tcp.default' configuration.  Set the default listener to allow incoming connections.
 ```
 listener.tcp.default = "0.0.0.0:1883"
 ```
@@ -132,5 +134,20 @@ First clone the repo:
 ```
 git clone https://github.com/AzureIoTGBB/IoT-Hub-MQTT-Broker-Tutorial 
 ```
-Open AzureMQTTSendReceive.sln in Visual Studio 2017.  
+Open AzureMQTTSendReceive.sln in Visual Studio 2017, then open the App.config file.  
+
+* Set the "MQTTDevice" connection string to the connection string for your device
+* Set the "MQTTBrokerAddress" to either the domain name or the ip address of your MQTT server
+* Leave "MQTTUsername" blank ("")
+* Leave "MQTTPassword" blank ("")
+
+Compile the solution.  
+
+Make two copies of the binaries (debug directory), one for sending and one for receiving.  The code will send the CPU and Memory values from your PC to the MQTT Broker.  
+```
+<directory1>\AzureMQTTSendReceive.exe send
+<directory2>\AzureMQTTSendReceive.exe receive
+```
+
+
 
